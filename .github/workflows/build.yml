@@ -13,6 +13,7 @@ jobs:
           cache: 'yarn'
       - run: yarn install
         name: Install dependencies
+      - run: yarn build
       - run: yarn lint
         name: Lint check
       - run: yarn format:check
