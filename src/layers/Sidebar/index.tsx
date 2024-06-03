@@ -1,5 +1,5 @@
 import { Menu, Layout } from 'antd'
-import { SendOutlined } from '@ant-design/icons'; // Add this line
+import { SendOutlined } from '@ant-design/icons' // Add this line
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
   const navigate = useNavigate()
-  const [collapsed, setCollapsed] = useState(false);
-  const { Sider } = Layout;
+  const [collapsed, setCollapsed] = useState(false)
+  const { Sider } = Layout
 
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
