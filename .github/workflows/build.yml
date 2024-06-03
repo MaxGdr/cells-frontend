@@ -36,22 +36,27 @@ jobs:
         with:
           name: typescript-build-artifact
           path: build
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
       - name: Configure GCP Credentials
         uses: "google-github-actions/auth@v2"
         with:
           credentials_json: "${{ secrets.GOOGLE_CREDENTIALS }}" 
+      - name: Configure GCloud Auth provider with Docker
+        run: |
+            gcloud auth configure-docker "${{ vars.DOCKER_ARTIFACT_REGISTRY }}"
+      - run: docker build -t ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }} .
+      - run: |
+            echo "docker tag ${{ github.event.repository.name }} \
+            ${{ vars.DOCKER_ARTIFACT_REGISTRY }}/ \
+            ${{ vars.DOCKER_ARTIFACT_PROJECT}}/ \
+            ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/ \
+            ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }}"
       # - name: Get GKE credentials
       #   uses: "google-github-actions/get-gke-credentials@v2"
       #   with:
       #     cluster_name: "${{ vars.GKE_NAME }}"
       #     location: "${{ vars.GKE_LOCATION }}"
-      - name: Configure GCloud Auth provider with Docker
-        run: |
-            gcloud auth configure-docker "${{ vars.DOCKER_ARTIFACT_REGISTRY }}"
-      - run: docker build -t ${{ github.event.repository.name }}:${{ github.sha }} .
-      - run: |
-            echo "docker tag ${{ github.event.repository.name }} \
-              ${{ vars.DOCKER_ARTIFACT_REGISTRY }}/ \
-              ${{ vars.DOCKER_ARTIFACT_PROJECT}}/ \
-              ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/ \
-              ${{ github.event.repository.name }}:${{ github.sha }}"
