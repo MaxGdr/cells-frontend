@@ -56,13 +56,13 @@ jobs:
             ${{ vars.DOCKER_ARTIFACT_REGISTRY }}/\
             ${{ vars.DOCKER_ARTIFACT_PROJECT}}/\
             ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/\
-            ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }}"
+            ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }}
       - name: publish
         run: |
             docker push ${{ vars.DOCKER_ARTIFACT_REGISTRY }}/\
             ${{ vars.DOCKER_ARTIFACT_PROJECT}}/\
             ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/\
-            ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }}"
+            ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }}
       # - name: Get GKE credentials
       #   uses: "google-github-actions/get-gke-credentials@v2"
       #   with:
