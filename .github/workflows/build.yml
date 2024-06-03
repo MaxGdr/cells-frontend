@@ -3,7 +3,7 @@ on:
   - pull_request
 jobs:
   build-ts:
-    name: Build Typescript
+    name: Typescript Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
           name: typescript-build-artifact
           path: build
   build-docker:
-    name: Build Docker
+    name: Docker Build&Publish
     runs-on: ubuntu-latest
     needs: build-ts
     steps:
@@ -48,12 +48,20 @@ jobs:
       - name: Configure GCloud Auth provider with Docker
         run: |
             gcloud auth configure-docker "${{ vars.DOCKER_ARTIFACT_REGISTRY }}"
-      - run: docker build -t ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }} .
-      - run: |
-            echo "docker tag ${{ github.event.repository.name }} \
-            ${{ vars.DOCKER_ARTIFACT_REGISTRY }}/ \
-            ${{ vars.DOCKER_ARTIFACT_PROJECT}}/ \
-            ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/ \
+      - name: build
+        run: docker build -t ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }} .
+      - name: tag
+        run: |
+            docker tag ${{ github.event.repository.name }}\
+            ${{ vars.DOCKER_ARTIFACT_REGISTRY }}/\
+            ${{ vars.DOCKER_ARTIFACT_PROJECT}}/\
+            ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/\
+            ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }}"
+      - name: publish
+        run: |
+            docker push ${{ vars.DOCKER_ARTIFACT_REGISTRY }}/\
+            ${{ vars.DOCKER_ARTIFACT_PROJECT}}/\
+            ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/\
             ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }}"
       # - name: Get GKE credentials
       #   uses: "google-github-actions/get-gke-credentials@v2"
