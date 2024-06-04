@@ -82,7 +82,7 @@ jobs:
       - name: Get GKE credentials
         uses: "google-github-actions/get-gke-credentials@v2"
         with:
-          cluster_name: "${{ vars.GKE_NAME }}"
+          cluster_name: "${{ vars.GKE_CLUSTER_NAME }}"
           location: "${{ vars.GKE_LOCATION }}"
       - name: Install Helm
         run: |
