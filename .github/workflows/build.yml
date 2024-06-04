@@ -90,9 +90,10 @@ jobs:
       - name: Helm Deploy
         run: |
           helm upgrade --install ${{ github.event.repository.name }} \
-            --set image.tag=${{ env.COMMIT_SHORT_SHA }} \
-            --set image.repository=${{ vars.DOCKER_ARTIFACT_REGISTRY }}/\
-            ${{ vars.DOCKER_ARTIFACT_PROJECT}}/\
-            ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/\
-            ${{ github.event.repository.name }} \
-            ./chart
+          --set image.tag=${{ env.COMMIT_SHORT_SHA }} \
+          --set image.repository=${{ vars.DOCKER_ARTIFACT_REGISTRY }}/\
+          ${{ vars.DOCKER_ARTIFACT_PROJECT}}/\
+          ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/\
+          ${{ github.event.repository.name }} \
+          --wait \
+          ./chart
