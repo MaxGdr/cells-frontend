@@ -89,9 +89,10 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
       - name: Helm Deploy
         run: |
-          helm upgrade --install ${{ github.event.repository.name }} chart/ \
+          helm upgrade --install ${{ github.event.repository.name }} \
             --set image.tag=${{ env.COMMIT_SHORT_SHA }} \
             --set image.repository=${{ vars.DOCKER_ARTIFACT_REGISTRY }}/\
             ${{ vars.DOCKER_ARTIFACT_PROJECT}}/\
             ${{ vars.DOCKER_ARTIFACT_REPOSITORY }}/\
-            ${{ github.event.repository.name }}
+            ${{ github.event.repository.name }} \
+            ./chart
