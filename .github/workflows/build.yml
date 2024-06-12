@@ -49,8 +49,7 @@ jobs:
         run: |
             gcloud auth configure-docker "${{ vars.DOCKER_ARTIFACT_REGISTRY }}"
       - name: build
-        run: | 
-          ls
+        run: |
           docker build -t ${{ github.event.repository.name }}:${{ env.COMMIT_SHORT_SHA }} .
       - name: tag
         run: |
