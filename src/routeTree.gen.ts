@@ -16,6 +16,8 @@ import { Route as LoginImport } from './routes/login'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutSettingsImport } from './routes/_layout/settings'
+import { Route as LayoutModelsIndexImport } from './routes/_layout/models.index'
+import { Route as LayoutModelsModelIdImport } from './routes/_layout/models.$modelId'
 
 // Create/Update Routes
 
@@ -44,6 +46,16 @@ const LayoutSettingsRoute = LayoutSettingsImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutModelsIndexRoute = LayoutModelsIndexImport.update({
+  path: '/models/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutModelsModelIdRoute = LayoutModelsModelIdImport.update({
+  path: '/models/$modelId',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -68,13 +80,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/models/$modelId': {
+      preLoaderRoute: typeof LayoutModelsModelIdImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/models/': {
+      preLoaderRoute: typeof LayoutModelsIndexImport
+      parentRoute: typeof LayoutImport
+    }
   }
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  LayoutRoute.addChildren([LayoutSettingsRoute, LayoutIndexRoute]),
+  LayoutRoute.addChildren([
+    LayoutSettingsRoute,
+    LayoutIndexRoute,
+    LayoutModelsModelIdRoute,
+    LayoutModelsIndexRoute,
+  ]),
   LoginRoute,
   SignUpRoute,
 ])

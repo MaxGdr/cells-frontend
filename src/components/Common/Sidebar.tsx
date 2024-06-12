@@ -54,7 +54,7 @@ const Sidebar = () => {
           <DrawerBody py={8}>
             <Flex flexDir="column" justify="space-between">
               <Box>
-                <Image src={Logo} alt="logo" p={6} />
+                {/* <Image src={Logo} alt="logo" p={6} /> */}
                 <SidebarItems onClose={onClose} />
                 <Flex
                   as="button"
