@@ -9,8 +9,8 @@ const disabledStyles = {
 const theme = extendTheme({
   colors: {
     ui: {
-      main: "#96000c",
-      secondary: "#EDF2F7",
+      main: "#e57373",
+      secondary: "#ffffff",
       success: "#48BB78",
       danger: "#E53E3E",
       light: "#FAFAFA",
