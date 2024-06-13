@@ -120,78 +120,77 @@ const ModelVersion = ({ model_id, model_version }: ModelVersionProps) => {
 
   return (
     <SimpleGrid columns={2}>
-        <Box bg=''>
-            <Card maxW="lg">
-                <CardHeader>
-                <Flex spacing="4">
-                    <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-                    <IoCubeOutline size="45" />
-                    <Box>
-                        <Heading size="sm">Version Details</Heading>
-                    </Box>
-                    </Flex>
-                </Flex>
-                </CardHeader>
-                <Container as="form" onSubmit={handleSubmit(onSubmit)}>
-                <CardBody>
-                    <Text>{model_version?.description}</Text>
-                    <Text pt={10}>
-                    Vertex endpoint: <Tag>{model_version?.endpoint_id}</Tag>
-                    </Text>
-                    <FormControl id="predict" pt={10}>
-                    <FormLabel>Select Image for prediction</FormLabel>
-                    <Input
-                        id="image"
-                        type="file"
-                        onChange={(e) => handleImageChange(e)}
-                        required
-                    />
-                    </FormControl>
-                </CardBody>
-                <CardFooter
-                    justify="space-between"
-                    flexWrap="wrap"
-                    sx={{
-                    "& > button": {
-                        minW: "136px",
-                    },
-                    }}
-                >
-                    <Button
-                    flex="1"
-                    variant="ghost"
-                    leftIcon={<IoSendSharp />}
-                    type="submit"
-                    isLoading={isSubmitting}
-                    >
-                    Predict
-                    </Button>
-                </CardFooter>
-                </Container>
-            </Card>
-        </Box>
+      <Box bg="">
+        <Card maxW="lg">
+          <CardHeader>
+            <Flex>
+              <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+                <IoCubeOutline size="45" />
+                <Box>
+                  <Heading size="sm">Version Details</Heading>
+                </Box>
+              </Flex>
+            </Flex>
+          </CardHeader>
+          <Container as="form" onSubmit={handleSubmit(onSubmit)}>
+            <CardBody>
+              <Text>{model_version?.description}</Text>
+              <Text pt={10}>
+                Vertex endpoint: <Tag>{model_version?.endpoint_id}</Tag>
+              </Text>
+              <FormControl id="predict" pt={10}>
+                <FormLabel>Select Image for prediction</FormLabel>
+                <Input
+                  id="image"
+                  type="file"
+                  onChange={(e) => handleImageChange(e)}
+                  required
+                />
+              </FormControl>
+            </CardBody>
+            <CardFooter
+              justify="space-between"
+              flexWrap="wrap"
+              sx={{
+                "& > button": {
+                  minW: "136px",
+                },
+              }}
+            >
+              <Button
+                flex="1"
+                variant="ghost"
+                leftIcon={<IoSendSharp />}
+                type="submit"
+                isLoading={isSubmitting}
+              >
+                Predict
+              </Button>
+            </CardFooter>
+          </Container>
+        </Card>
+      </Box>
 
-        <Box>
-            <Text textAlign={'center'}>Prediction Result</Text>
-            <SimpleGrid columns={2} spacing={15}>
-                <Box>
-                    {image && <Image src={image} alt="Selected image" />}
-                </Box>
-                {predictResponse && (
-                <Box>
-                     <Tag size="md" key="md" borderRadius="full" colorScheme="red">
-                        <TagLabel>
-                            {predictResponse && predictResponse.predicted_class}
-                        </TagLabel>
-                    </Tag>
-                    <Stat mt={10}>
-                        <StatLabel>Confidence</StatLabel>
-                        <StatNumber>{predictResponse && predictResponse.confidences.toFixed(2)}</StatNumber>
-                    </Stat>
-                </Box>
-                )}
-            </SimpleGrid>
-        </Box>
+      <Box>
+        <Text textAlign={"center"}>Prediction Result</Text>
+        <SimpleGrid columns={2} spacing={15}>
+          <Box>{image && <Image src={image} alt="Selected image" />}</Box>
+          {predictResponse && (
+            <Box>
+              <Tag size="md" key="md" borderRadius="full" colorScheme="red">
+                <TagLabel>{predictResponse?.predicted_class}</TagLabel>
+              </Tag>
+              <Stat mt={10}>
+                <StatLabel>Confidence</StatLabel>
+                <StatNumber>
+                  {predictResponse?.confidences.toFixed(2)}
+                </StatNumber>
+              </Stat>
+            </Box>
+          )}
+          {error && <Text color="ui.danger">{error}</Text>}
+        </SimpleGrid>
+      </Box>
     </SimpleGrid>
   )
 }

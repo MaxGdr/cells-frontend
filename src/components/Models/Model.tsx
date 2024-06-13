@@ -30,7 +30,7 @@ const Model = ({ model }: ModelProps) => {
   return (
     <Card maxW="md">
       <CardHeader>
-        <Flex spacing="4">
+        <Flex>
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
             <IoCubeOutline size="45" />
             <Box>

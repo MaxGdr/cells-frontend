@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Grid,
-  GridItem,
-  Spacer,
-  Text,
-} from "@chakra-ui/react"
+import { Box, Button, Container, Flex, Spacer, Text } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { type ModelsGetResponseSchema, ModelsService } from "../../client"

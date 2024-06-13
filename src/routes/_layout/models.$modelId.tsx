@@ -1,20 +1,10 @@
-import {
-  Box,
-  Container,
-  Grid,
-  GridItem,
-  Select,
-  Tag,
-  Text,
-} from "@chakra-ui/react"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { Container, Grid, GridItem, Select, Tag, Text } from "@chakra-ui/react"
+import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
-import { set } from "react-hook-form"
 import {
   type ModelSchema,
   type ModelVersionSchema,
-  ModelsData,
   ModelsService,
 } from "../../client"
 import ModelVersion from "../../components/Models/ModelVersion"
@@ -27,7 +17,7 @@ function ModelDetail() {
   const { modelId } = Route.useParams()
   const [version, setVersion] = useState<ModelVersionSchema>()
 
-  const { data: model, isLoading } = useQuery<ModelSchema>({
+  const { data: model } = useQuery<ModelSchema>({
     queryKey: ["model"],
     queryFn: () =>
       ModelsService.getModelApiV1ModelsModelIdGet({
