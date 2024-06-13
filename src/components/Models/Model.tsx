@@ -36,7 +36,7 @@ const Model = ({ model }: ModelProps) => {
             <Box>
               <Heading size="sm">{model.name}</Heading>
               <HStack spacing={4}>
-                <Tag size="md" key="md" variant="solid" colorScheme="teal">
+                <Tag size="md" key="md" borderRadius="full" colorScheme="red">
                   {model.model_type}
                 </Tag>
               </HStack>
