@@ -1,4 +1,4 @@
-import { Box, Container, Grid, GridItem, Text } from "@chakra-ui/react"
+import { Box, Container, SimpleGrid, Text } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { type ModelsGetResponseSchema, ModelsService } from "../../client"
@@ -27,13 +27,13 @@ function Dashboard() {
         </Box>
         <Box pt={12} m={4}>
           <Text fontSize="2xl">Your models</Text>
-          <Grid templateColumns="repeat(2, 1fr)" gap={5}>
+          <SimpleGrid minChildWidth="300px" columns={3} spacing={10} mb={20}>
             {models?.data.map((model) => (
-              <GridItem w="100%" h="10">
+              <Box>
                 <Model model={model} />
-              </GridItem>
+              </Box>
             ))}
-          </Grid>
+          </SimpleGrid>
         </Box>
       </Container>
     </>

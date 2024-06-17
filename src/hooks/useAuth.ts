@@ -18,11 +18,20 @@ const isLoggedIn = () => {
 const useAuth = () => {
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
-  const { data: user, isLoading } = useQuery<UserSchema | null, Error>({
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useQuery<UserSchema | null, Error>({
     queryKey: ["currentUser"],
     queryFn: UsersService.getCurrentUserApiV1UsersMeGet,
     enabled: isLoggedIn(),
   })
+
+  if (isError) {
+    localStorage.removeItem("access_token")
+    navigate({ to: "/login" })
+  }
 
   const login = async (data: AccessToken) => {
     const response =

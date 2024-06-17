@@ -40,3 +40,15 @@ export const confirmPasswordRules = (
 
   return rules
 }
+
+export const truncateString = (str: string, num: number) => {
+  if (str.length <= num) {
+    return str
+  }
+  return `${str.slice(0, num)}...`
+}
+
+export const calc = (num: number) => {
+  const matchResult = num.toString().match(/^-?\d+(?:\.\d{0,2})?/)
+  return matchResult ? matchResult[0] : ""
+}

@@ -4,7 +4,7 @@ import { FiHome, FiSettings } from "react-icons/fi"
 import { IoCubeOutline } from "react-icons/io5"
 
 const items = [
-  { icon: FiHome, title: "Dashboard", path: "/" },
+  { icon: FiHome, title: "Home", path: "/" },
   { icon: IoCubeOutline, title: "Models", path: "/models" },
   { icon: FiSettings, title: "User Settings", path: "/settings" },
 ]

@@ -35,6 +35,7 @@ import {
   type PredictsData,
   PredictsService,
 } from "../../client"
+import { calc } from "../../utils"
 
 interface ModelVersionProps {
   model_id: number
@@ -172,7 +173,9 @@ const ModelVersion = ({ model_id, model_version }: ModelVersionProps) => {
       </Box>
 
       <Box>
-        <Text textAlign={"center"}>Prediction Result</Text>
+        <Text fontSize="2xl" textAlign={"center"}>
+          Prediction Result
+        </Text>
         <SimpleGrid columns={2} spacing={15}>
           <Box>{image && <Image src={image} alt="Selected image" />}</Box>
           {predictResponse && (
@@ -182,9 +185,7 @@ const ModelVersion = ({ model_id, model_version }: ModelVersionProps) => {
               </Tag>
               <Stat mt={10}>
                 <StatLabel>Confidence</StatLabel>
-                <StatNumber>
-                  {predictResponse?.confidences.toFixed(2)}
-                </StatNumber>
+                <StatNumber>{calc(predictResponse?.confidences)}</StatNumber>
               </Stat>
             </Box>
           )}

@@ -18,6 +18,7 @@ import { IoCubeOutline } from "react-icons/io5"
 import { useNavigate } from "@tanstack/react-router"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import type { ModelSchema } from "../../client"
+import { truncateString } from "../../utils"
 
 interface ModelProps {
   model: ModelSchema
@@ -28,13 +29,13 @@ const Model = ({ model }: ModelProps) => {
   const navigate = useNavigate()
 
   return (
-    <Card maxW="md">
+    <Card height="100%" mt={5}>
       <CardHeader>
         <Flex>
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
             <IoCubeOutline size="45" />
             <Box>
-              <Heading size="sm">{model.name}</Heading>
+              <Heading size="sm">{truncateString(model.name, 22)}</Heading>
               <HStack spacing={4}>
                 <Tag size="md" key="md" borderRadius="full" colorScheme="red">
                   {model.model_type}
