@@ -112,7 +112,7 @@ function SignUp() {
         Sign up
       </Heading>
       <Text align="center">
-        A password recovery email will be sent to the registered account.
+        Create your account to access the platform.
       </Text>
       <FormControl isInvalid={!!errors.email}>
         <FormLabel htmlFor="email">Email</FormLabel>
