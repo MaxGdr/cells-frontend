@@ -66,7 +66,7 @@ const ModelVersion = ({ model_id, model_version }: ModelVersionProps) => {
     return result
   }
 
-  const signupMutation = useMutation({
+  const predictMutation = useMutation({
     mutationFn: predict,
     onSuccess: (data) => {
       setPredictionResponse(data)
@@ -111,7 +111,7 @@ const ModelVersion = ({ model_id, model_version }: ModelVersionProps) => {
             },
           },
         }
-        const resp = await signupMutation.mutateAsync(predictReq)
+        const resp = await predictMutation.mutateAsync(predictReq)
         console.log(resp)
       }
     } catch {
