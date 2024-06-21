@@ -111,9 +111,7 @@ function SignUp() {
       <Heading size="xl" color="ui.main" textAlign="center" mb={2}>
         Sign up
       </Heading>
-      <Text align="center">
-        A password recovery email will be sent to the registered account.
-      </Text>
+      <Text align="center">Create your account to access the platform.</Text>
       <FormControl isInvalid={!!errors.email}>
         <FormLabel htmlFor="email">Email</FormLabel>
         <Input

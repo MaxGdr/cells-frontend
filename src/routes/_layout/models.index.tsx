@@ -1,7 +1,18 @@
-import { Box, Button, Container, Flex, Spacer, Text } from "@chakra-ui/react"
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  SimpleGrid,
+  Spacer,
+  Text,
+  Tooltip,
+  useDisclosure,
+} from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { type ModelsGetResponseSchema, ModelsService } from "../../client"
+import CreateModelDrawer from "../../components/Models/CreateModelDrawer"
 import Model from "../../components/Models/Model"
 
 export const Route = createFileRoute("/_layout/models/")({
@@ -14,6 +25,7 @@ function Models() {
     queryFn: () =>
       ModelsService.getModelsApiV1ModelsGet({ limit: 20, skip: 0 }),
   })
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -24,15 +36,19 @@ function Models() {
           </Box>
           <Spacer />
           <Box p="4">
-            <Button>+</Button>
+            <Tooltip hasArrow label="Create new model">
+              <Button onClick={onOpen}>+</Button>
+            </Tooltip>
           </Box>
         </Flex>
-
-        <Box pt={12} m={4}>
+        <SimpleGrid minChildWidth="300px" columns={3} spacing={10} mb={20}>
           {models?.data.map((model) => (
-            <Model model={model} key={model.id} />
+            <Box>
+              <Model model={model} key={model.id} />
+            </Box>
           ))}
-        </Box>
+        </SimpleGrid>
+        <CreateModelDrawer isOpen={isOpen} onClose={onClose} />
       </Container>
     </>
   )

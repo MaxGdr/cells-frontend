@@ -7,12 +7,12 @@ const loadDevtools = () =>
   Promise.all([
     import("@tanstack/router-devtools"),
     import("@tanstack/react-query-devtools"),
-  ]).then(([routerDevtools, reactQueryDevtools]) => {
+  ]).then(([routerDevtools]) => {
     return {
       default: () => (
         <>
           <routerDevtools.TanStackRouterDevtools />
-          <reactQueryDevtools.ReactQueryDevtools />
+          {/* <reactQueryDevtools.ReactQueryDevtools /> */}
         </>
       ),
     }
